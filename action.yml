@@ -1,9 +1,9 @@
-name: 'AI-based PR Reviewer & Summarizer with Chat Capabilities'
-description: 'AI-based PR Reviewer & Summarizer with Chat Capabilities'
+name: 'PRIX'
+description: 'AI-based PR Reviewer & Summarizer and Auditor'
 branding:
   icon: 'git-merge'
   color: 'orange'
-author: 'CodeRabbit LLC'
+author: 'PRIX'
 inputs:
   debug:
     required: false
@@ -144,35 +144,35 @@ inputs:
     required: false
     description: 'Disable release notes'
     default: 'false'
-  openai_base_url:
+  api_base_url:
     required: false
-    description: 'The url of the openai api interface. For Groq, use: https://api.groq.com/openai/v1'
-    default: 'https://api.openai.com/v1'
-  openai_light_model:
+    description: 'The url of the API interface.'
+    default: 'https://api.groq.com/openai/v1'
+  light_model:
     required: false
     description:
       'Model to use for simple tasks like summarizing diff on a file. (Recommended: gpt-4o-mini, llama-3.1-8b-instant)'
-    default: 'gpt-4o-mini'
-  openai_heavy_model:
+    default: 'llama-3.1-8b-instant'
+  heavy_model:
     required: false
     description: 'Model to use for complex tasks such as code reviews. (Recommended: gpt-4o, llama-3.3-70b-versatile)'
-    default: 'gpt-4o'
-  openai_model_temperature:
+    default: 'llama-3.3-70b-versatile'
+  model_temperature:
     required: false
-    description: 'Temperature for GPT model'
+    description: 'Temperature for the model'
     default: '0.05'
-  openai_retries:
+  retries:
     required: false
     description:
-      'How many times to retry OpenAI API in case of timeouts or errors?'
+      'How many times to retry API in case of timeouts or errors?'
     default: '5'
-  openai_timeout_ms:
+  timeout_ms:
     required: false
-    description: 'Timeout for OpenAI API call in millis'
+    description: 'Timeout for API call in millis'
     default: '360000'
-  openai_concurrency_limit:
+  concurrency_limit:
     required: false
-    description: 'How many concurrent API calls to make to OpenAI servers?'
+    description: 'How many concurrent API calls to make to the AI servers?'
     default: '10'
   github_concurrency_limit:
     required: false
@@ -180,11 +180,12 @@ inputs:
     default: '10'
   system_message:
     required: false
-    description: 'System message to be sent to OpenAI'
+    description: 'System message to be sent to the AI model'
     default: |
-      You are `@ai-pr-reviewer` (aka `github-actions[bot]`), a language model 
-      trained by OpenAI. Your purpose is to act as a highly experienced 
-      software engineer and provide a thorough review of the code hunks.
+      You are `@ai-pr-reviewer` (aka `github-actions[bot]`), a highly 
+      sophisticated language model. Your purpose is to act as a 
+      highly experienced software engineer and provide a thorough 
+      review of the code hunks.
       Your primary goal is to provide deep architectural insights and catch 
       complex bugs that a junior developer would miss. You will act as an 
       Audit Agent, rigorously testing local conditions and boundary values.
@@ -245,7 +246,3 @@ inputs:
 runs:
   using: 'node24'
   main: 'dist/index.js'
-
-
-
-#actions
